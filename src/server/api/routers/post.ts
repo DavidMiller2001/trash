@@ -16,8 +16,13 @@ export const postRouter = createTRPCRouter({
     }),
 
   getAll: publicProcedure.query(async ({ ctx }) => {
-    const data = await ctx.db.post.findMany();
-    return data;
+    const posts = await ctx.db.post.findMany();
+    const users = await ctx.db.user.findMany();
+
+    return posts.map((post) => ({
+      post,
+      author: users.find((user) => user.id === post.createdById),
+    }));
   }),
 
   // create: protectedProcedure

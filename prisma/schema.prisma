@@ -33,7 +33,6 @@ model Post {
     createdBy   User   @relation(fields: [createdById], references: [id])
     createdById String
 
-    @@index([id])
     @@index([createdById])
 }
 
