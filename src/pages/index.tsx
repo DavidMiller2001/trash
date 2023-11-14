@@ -1,6 +1,6 @@
-import { TRPCError } from "@trpc/server";
 import { signIn, useSession } from "next-auth/react";
 import Head from "next/head";
+import { useState } from "react";
 
 import { api } from "~/utils/api";
 import type { RouterOutputs } from "~/utils/api";
@@ -18,9 +18,20 @@ type User = {
 };
 
 const CreatePostForm = (props: { user: User }) => {
+  const createPost = api.post.create.useMutation();
   const { user } = props;
+  const [postText, setPostText] = useState("");
   return (
-    <form className="flex gap-4 border border-slate-200 p-8">
+    <form
+      className="flex gap-4 border border-slate-200 p-8"
+      onSubmit={(e) => {
+        e.preventDefault();
+        createPost.mutate({
+          userId: user.id,
+          content: postText,
+        });
+      }}
+    >
       <img
         src={`${user.image}`}
         alt="Profile Picture"
@@ -30,7 +41,12 @@ const CreatePostForm = (props: { user: User }) => {
         type="text"
         placeholder="What is happening!?"
         className="bg-transparent text-xl outline-none"
+        value={postText}
+        onChange={(e) => setPostText(e.target.value)}
       />
+      <button className="rounded-md bg-red-300 p-4 text-white" type="submit">
+        Submit
+      </button>
     </form>
   );
 };
@@ -39,8 +55,6 @@ type Post = RouterOutputs["post"]["getAll"][number];
 
 const PostView = (props: { post: Post }) => {
   const { post } = props;
-  // if (!post.author || !post.author.image)
-  //   throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
 
   if (post?.author?.image === null) {
     return <div>error!</div>;

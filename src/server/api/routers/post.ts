@@ -16,4 +16,23 @@ export const postRouter = createTRPCRouter({
       author: users.find((user) => user.id === post.createdById),
     }));
   }),
+
+  create: publicProcedure
+    .input(
+      z.object({
+        userId: z.string(),
+        content: z.string().max(280),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      // const user = await ctx.db.user.findFirst({where: {id: '12'}})
+      await ctx.db.post.create({
+        data: {
+          content: input.content,
+          createdById: input.userId,
+        },
+      });
+    }),
 });
+
+// clour9i0j0000w1zoxvr7ak1g
