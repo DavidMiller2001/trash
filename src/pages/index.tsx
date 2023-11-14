@@ -1,8 +1,9 @@
 import { TRPCError } from "@trpc/server";
-import { signIn, signOut, useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import Head from "next/head";
 
-import { RouterOutputs, api } from "~/utils/api";
+import { api } from "~/utils/api";
+import type { RouterOutputs } from "~/utils/api";
 
 const SignInComponent = () => {
   return <button onClick={() => signIn()}>Sign In</button>;
@@ -38,13 +39,13 @@ type Post = RouterOutputs["post"]["getAll"][number];
 
 const PostView = (props: { post: Post }) => {
   const { post } = props;
-  if (!post.author || !post.author.image)
-    throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+  // if (!post.author || !post.author.image)
+  //   throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
 
   return (
     <li className="flex items-center gap-4 border border-slate-200 p-8">
       <img
-        src={post.author.image}
+        src={post?.author?.image!}
         alt="Profile Picture"
         className="aspect-square w-14 rounded-full"
       />
