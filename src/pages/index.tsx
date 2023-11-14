@@ -42,10 +42,7 @@ const PostView = (props: { post: Post }) => {
     throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
 
   return (
-    <li
-      key={post.post.id}
-      className="flex items-center gap-4 border border-slate-200 p-8"
-    >
+    <li className="flex items-center gap-4 border border-slate-200 p-8">
       <img
         src={post.author.image}
         alt="Profile Picture"
@@ -84,7 +81,9 @@ export default function Home() {
         {!!sessionData && <CreatePostForm user={sessionData.user} />}
         <ul>
           {data.map((postWithAuthor) => {
-            return <PostView post={postWithAuthor} />;
+            return (
+              <PostView key={postWithAuthor.post.id} post={postWithAuthor} />
+            );
           })}
         </ul>
       </main>
