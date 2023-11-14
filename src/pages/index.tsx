@@ -39,13 +39,17 @@ type Post = RouterOutputs["post"]["getAll"][number];
 
 const PostView = (props: { post: Post }) => {
   const { post } = props;
-  // if (!post.author || !post.author.image)
-  //   throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+  if (!post.author || !post.author.image)
+    throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+
+  if (post?.author?.image === null) {
+    return <div>error!</div>;
+  }
 
   return (
     <li className="flex items-center gap-4 border border-slate-200 p-8">
       <img
-        src={post?.author?.image!}
+        src={post?.author?.image}
         alt="Profile Picture"
         className="aspect-square w-14 rounded-full"
       />
