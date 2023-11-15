@@ -6,7 +6,7 @@ import { ProfileImage } from "./ProfileImage";
 
 type Post = RouterOutputs["post"]["getAll"][number];
 
-export const PostView = (props: { post: Post }) => {
+const PostView = (props: { post: Post }) => {
   dayjs.extend(relativeTime);
 
   const { post } = props;
@@ -38,3 +38,5 @@ export const PostView = (props: { post: Post }) => {
     </li>
   );
 };
+
+export default PostView;

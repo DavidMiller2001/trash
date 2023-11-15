@@ -1,5 +1,5 @@
 import Image from "next/image";
-export const ProfileImage = (props: { size?: number; src: string }) => {
+const ProfileImage = (props: { size?: number; src: string }) => {
   const { size, src } = props;
   return (
     <Image
@@ -11,3 +11,5 @@ export const ProfileImage = (props: { size?: number; src: string }) => {
     />
   );
 };
+
+export default ProfileImage;
