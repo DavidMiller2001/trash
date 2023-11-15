@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { api } from "~/utils/api";
-import PostView from "../components/PostView";
+import PostView from "../../components/PostView";
 import Link from "next/link";
 
 const User = () => {

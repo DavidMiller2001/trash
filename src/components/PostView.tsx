@@ -11,16 +11,6 @@ const PostView = (props: { post: Post }) => {
 
   const { post } = props;
 
-  if (post.author === null) {
-    return <div>error!</div>;
-  }
-
-  if (post.author === undefined) return <div>error!</div>;
-
-  if (post?.author?.image === null) {
-    return <div>error!</div>;
-  }
-
   return (
     <li className="flex items-center gap-4 border border-slate-200 p-8">
       <ProfileImage src={`${post.author?.image}`} size={56} />

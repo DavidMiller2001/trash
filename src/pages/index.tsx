@@ -4,10 +4,10 @@ import Head from "next/head";
 import { useState } from "react";
 
 import { api } from "~/utils/api";
-import Spinner from "~/pages/components/Spinner";
+import Spinner from "~/components/Spinner";
 
-import PostView from "~/pages/components/PostView";
-import ProfileImage from "~/pages/components/ProfileImage";
+import PostView from "~/components/PostView";
+import ProfileImage from "~/components/ProfileImage";
 
 const SignInComponent = () => {
   return <button onClick={() => signIn()}>Sign In</button>;
