@@ -15,6 +15,8 @@ const PostView = (props: { post: Post }) => {
     return <div>error!</div>;
   }
 
+  if (post.author === undefined) return <div>error!</div>;
+
   if (post?.author?.image === null) {
     return <div>error!</div>;
   }
