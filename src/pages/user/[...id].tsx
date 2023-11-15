@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const User = () => {
   const router = useRouter();
-  const id = router.query?.id?.toString() || "";
+  const id = router.query?.id?.toString() ?? "";
 
   const { data: user } = api.user.find.useQuery({ id: id });
   const { data: posts } = api.user.getPosts.useQuery({ id: id });
