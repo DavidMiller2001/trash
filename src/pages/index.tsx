@@ -1,16 +1,15 @@
-import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
 import { signIn, useSession } from "next-auth/react";
 import Head from "next/head";
-import Image from "next/image";
+
 import { useState } from "react";
 
 import { api } from "~/utils/api";
-import type { RouterOutputs } from "~/utils/api";
-import Spinner from "./components/Spinner";
-import Link from "next/link";
-import { PostView } from "./components/PostView";
-import { ProfileImage } from "./components/ProfileImage";
+
+// import Spinner from "./components/Spinner";
+import Spinner from "~/pages/components/Spinner";
+
+import { PostView } from "~/pages/components/PostView";
+import { ProfileImage } from "~/pages/components/ProfileImage";
 
 const SignInComponent = () => {
   return <button onClick={() => signIn()}>Sign In</button>;
