@@ -1,5 +1,6 @@
 import { signIn, useSession } from "next-auth/react";
 import Head from "next/head";
+import Image from "next/image";
 import { useState } from "react";
 
 import { api } from "~/utils/api";
@@ -17,26 +18,34 @@ type User = {
   id: string;
 };
 
+const ProfileImage = (props: { size?: number; src: string }) => {
+  const { size, src } = props;
+  return (
+    <Image
+      src={`${src}`}
+      width={size ?? 16}
+      height={size ?? 16}
+      alt="Profile Picture"
+      className="rounded-full"
+    />
+  );
+};
+
 const CreatePostForm = (props: { user: User }) => {
-  const createPost = api.post.create.useMutation();
+  const { mutate } = api.post.create.useMutation();
   const { user } = props;
   const [postText, setPostText] = useState("");
+
   return (
     <form
       className="flex gap-4 border border-slate-200 p-8"
       onSubmit={(e) => {
         e.preventDefault();
-        createPost.mutate({
-          userId: user.id,
-          content: postText,
-        });
+        mutate({ content: postText });
       }}
     >
-      <img
-        src={`${user.image}`}
-        alt="Profile Picture"
-        className="aspect-square w-14 rounded-full"
-      />
+      <ProfileImage size={56} src={`${user.image}`} />
+
       <input
         type="text"
         placeholder="What is happening!?"

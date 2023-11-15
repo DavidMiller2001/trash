@@ -17,19 +17,17 @@ export const postRouter = createTRPCRouter({
     }));
   }),
 
-  create: publicProcedure
+  create: protectedProcedure
     .input(
       z.object({
-        userId: z.string(),
-        content: z.string().max(280),
+        content: z.string().min(1).max(280),
       }),
     )
     .mutation(async ({ ctx, input }) => {
-      // const user = await ctx.db.user.findFirst({where: {id: '12'}})
       await ctx.db.post.create({
         data: {
           content: input.content,
-          createdById: input.userId,
+          createdById: ctx.session.user.id,
         },
       });
     }),
