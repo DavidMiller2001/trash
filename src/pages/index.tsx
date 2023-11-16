@@ -22,29 +22,39 @@ type User = {
 };
 
 const CreatePostForm = (props: { user: User }) => {
-  const { mutate } = api.post.create.useMutation();
+  const utils = api.useUtils();
+  const { mutate, isLoading: isPosting } = api.post.create.useMutation({
+    onSuccess: () => {
+      utils.invalidate();
+      setPostText("");
+    },
+  });
   const { user } = props;
   const [postText, setPostText] = useState("");
 
   return (
     <form
-      className="flex items-center gap-4 border border-slate-200 p-8"
+      className="border-bottom flex justify-between gap-4 border-slate-200 pl-8 pr-0"
       onSubmit={(e) => {
         e.preventDefault();
         mutate({ content: postText });
       }}
     >
-      <ProfileImage size={56} src={`${user.image}`} />
+      <div className="flex gap-4 py-8">
+        <ProfileImage size={56} src={`${user.image}`} />
 
-      <input
-        type="text"
-        placeholder="What is happening!?"
-        className="bg-transparent text-xl outline-none"
-        value={postText}
-        onChange={(e) => setPostText(e.target.value)}
-      />
+        <input
+          type="text"
+          placeholder="What is happening!?"
+          className="bg-transparent text-xl outline-none"
+          value={postText}
+          onChange={(e) => setPostText(e.target.value)}
+          disabled={isPosting}
+        />
+      </div>
+
       <button
-        className="h-10 cursor-pointer rounded-full bg-blue-600 px-4 font-medium text-white hover:bg-blue-500"
+        className="relative right-0 w-24 cursor-pointer border-none bg-blue-600 px-4 font-medium text-white hover:bg-blue-500"
         type="submit"
       >
         Post

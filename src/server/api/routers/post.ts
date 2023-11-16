@@ -8,7 +8,10 @@ import {
 
 export const postRouter = createTRPCRouter({
   getAll: publicProcedure.query(async ({ ctx }) => {
-    const posts = await ctx.db.post.findMany();
+    const posts = await ctx.db.post.findMany({
+      take: 100,
+      orderBy: [{ createdAt: "desc" }],
+    });
     const users = await ctx.db.user.findMany();
 
     return posts.map((post) => ({
