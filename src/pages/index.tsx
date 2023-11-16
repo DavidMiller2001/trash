@@ -25,7 +25,7 @@ const CreatePostForm = (props: { user: User }) => {
   const utils = api.useUtils();
   const { mutate, isLoading: isPosting } = api.post.create.useMutation({
     onSuccess: () => {
-      utils.invalidate();
+      void utils.invalidate();
       setPostText("");
     },
   });
