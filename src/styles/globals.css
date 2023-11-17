@@ -4,5 +4,5 @@
 
 body {
   font-family: "Arial";
-  background: #777;
+  @apply bg-slate-900;
 }

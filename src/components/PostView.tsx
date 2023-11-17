@@ -12,11 +12,11 @@ const PostView = (props: { post: Post }) => {
   const { post } = props;
 
   return (
-    <li className="flex items-center gap-4 border border-slate-200 p-8">
+    <li className="flex items-center gap-4 border-b border-slate-600 p-8">
       <ProfileImage src={`${post.author?.image}`} size={56} />
       <div>
-        <p className="flex gap-[5px] text-sm text-slate-500 ">
-          <span className="cursor-pointer hover:text-black hover:underline">
+        <p className="flex gap-[5px] text-sm text-slate-400">
+          <span className="cursor-pointer hover:text-slate-500">
             <Link
               href={{
                 pathname: "/user/[...id]",
@@ -29,7 +29,7 @@ const PostView = (props: { post: Post }) => {
           <span>·</span>
           <span>{dayjs(post.post.createdAt).fromNow()}</span>
         </p>
-        <h2 className="text-xl">{post.post.content}</h2>
+        <h2 className="text-xl text-slate-200">{post.post.content}</h2>
       </div>
     </li>
   );
