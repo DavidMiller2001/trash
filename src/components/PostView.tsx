@@ -15,7 +15,7 @@ const PostView = (props: { post: Post }) => {
     <li className="flex items-center gap-4 border-b border-slate-600 p-8">
       <ProfileImage src={`${post.author?.image}`} size={56} />
       <div>
-        <p className="flex gap-[5px] text-sm text-slate-400">
+        <p className=" flex gap-[5px] text-sm text-slate-400">
           <span className="cursor-pointer hover:text-slate-500">
             <Link
               href={{

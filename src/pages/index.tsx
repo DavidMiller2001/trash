@@ -34,7 +34,7 @@ const CreatePostForm = (props: { user: User }) => {
 
   return (
     <form
-      className="flex justify-between border-b border-slate-600 p-8"
+      className="small-screen-columns flex justify-between border-b border-slate-600 p-8"
       onSubmit={(e) => {
         e.preventDefault();
         mutate({ content: postText });

@@ -6,3 +6,9 @@ body {
   font-family: "Arial";
   @apply bg-slate-900;
 }
+
+@media (max-width: 350px) {
+  .small-screen-columns {
+    flex-direction: column;
+  }
+}
